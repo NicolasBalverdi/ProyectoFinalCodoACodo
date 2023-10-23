@@ -20,9 +20,9 @@ function calcularYGuardar() {
     let nocturnas=0;
 
     const esFinDeSemana = fechaIngresada.getDay() === 5 || fechaIngresada.getDay() === 6;
-    const esFeriado=esFeriado(fecha);
+    const esDiaFeriado=esFeriado(fecha);
     // Calcular las horas normales, extras al 50%, extras al 100% y nocturnas
-    if (esFinDeSemana || esFeriado) {
+    if (esFinDeSemana || esDiaFeriado) {
         extrasCien = horaFin-horaInicio;    
     }else{
         horasNormales = horasEnRangos['13-22'];
