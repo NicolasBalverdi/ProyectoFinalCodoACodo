@@ -19,15 +19,17 @@ function calcularYGuardar() {
     let extrasCien=0;
     let nocturnas=0;
 
+    const esFinDeSemana = fechaIngresada.getDay() === 5 || fechaIngresada.getDay() === 6;
+    const esFeriado=esFeriado(fecha);
     // Calcular las horas normales, extras al 50%, extras al 100% y nocturnas
-    if (esFinDeSemana(fechaIngresada) || esFeriado(fechaIngresada)) {
-        extrasCien = horasEnRangos['0-6']+horasEnRangos['6-13']+horasEnRangos['13-22']+horasEnRangos['22-24'];    
+    if (esFinDeSemana || esFeriado) {
+        extrasCien = horaFin-horaInicio;    
     }else{
         horasNormales = horasEnRangos['13-22'];
         extrasCincuenta = horasEnRangos['6-13'];
     }
  
-    nocturnas = horasEnRangos['0-6']+horasEnRangos['22-24']
+    nocturnas = horasEnRangos['0-6']+horasEnRangos['22-24'];
 
     // Calcular el sueldo total
     const sueldoTotal = valorHora * (horasNormales * 1 + extrasCincuenta * 1.5 + extrasCien * 2 + nocturnas * (17 / 15));
@@ -50,16 +52,19 @@ function calcularYGuardar() {
     document.getElementById('resultado').appendChild(a);
 }
 
-function esFinDeSemana(fecha) {
-    const diaSemana = fecha.getDay(); // 0 para domingo, 1 para lunes, 2 para martes, etc.
-    return diaSemana === 0 || diaSemana === 6; // Retorna true si es domingo (0) o sábado (6).
-}
-
 function esFeriado(fecha) {
     const feriados = [
-        new Date(2023, 0, 1),  // Año nuevo
-        new Date(2023, 3, 14), // Día de la Independencia
-        // Agregar más feriados según corresponda
+        new Date(2023, 0, 1),  // Año Nuevo
+        new Date(2023, 2, 24), // Carnaval
+        new Date(2023, 2, 25), // Carnaval
+        new Date(2023, 3, 2),  // Día del Veterano y de los Caídos en la Guerra de Malvinas
+        new Date(2023, 3, 24), // Viernes Santo
+        new Date(2023, 4, 2),  // Día del Trabajador
+        new Date(2023, 5, 25), // Día de la Revolución de Mayo
+        new Date(2023, 6, 9),  // Día de la Independencia
+        new Date(2023, 7, 21), // Día del Paso a la Inmortalidad del Gral. José de San Martín
+        new Date(2023, 9, 16), // Día del Respeto a la Diversidad Cultural
+        new Date(2023, 12, 25),// Navidad
     ];
 
     for (const feriado of feriados) {
