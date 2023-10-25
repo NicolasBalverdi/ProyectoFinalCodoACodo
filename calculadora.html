@@ -33,8 +33,30 @@
         <input type="number" id="hora-fin" name="hora-fin" required><br><br>
 
         <button type="button" onclick="calcularYGuardar()">Calcular y Guardar</button>
-    </form>
+        <button type="button" onclick="agregarNuevoEmpleado()">Agregar Nuevo Empleado</button>
+        <button id="exportExcelButton">Exportar a Excel</button>
 
+    </form>
+    <!-- Tabla para mostrar los resultados -->
+    <table id="tabla-resultados">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Categoría</th>
+                <th>Fecha</th>
+                <th>Horas Trabajadas</th>
+                <th>Horas Normales</th>
+                <th>Extras al 50%</th>
+                <th>Extras al 100%</th>
+                <th>Horas Nocturnas</th>
+                <th>Sueldo a Pagar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí se mostrarán los resultados -->
+        </tbody>
+    </table>
     <div id="resultado">
         <!-- Aquí mostrarás el resultado calculado -->
     </div>
