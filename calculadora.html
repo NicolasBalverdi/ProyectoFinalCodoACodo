@@ -26,17 +26,25 @@
         <input type="date" id="fecha" name="fecha" required><br><br>
 
         <!-- Nuevos campos para ingresar las horas -->
-        <label for="hora-inicio">Hora de Inicio:</label>
-        <input type="number" id="hora-inicio" name="hora-inicio" required><br><br>
+        <label for="hora-inicio-horas">Hora de Inicio:</label>
+        <input type="number" id="hora-inicio-horas" placeholder="Horas">
+        <input type="number" id="hora-inicio-minutos" placeholder="Minutos"><br><br>
 
-        <label for="hora-fin">Hora de Fin:</label>
-        <input type="number" id="hora-fin" name="hora-fin" required><br><br>
+        
+        <label for="hora-fin-horas">Hora de Fin:</label>
+        <input type="number" id="hora-fin-horas" placeholder="Horas">
+        <input type="number" id="hora-fin-minutos" placeholder="Minutos"><br><br>
+
 
         <button type="button" onclick="calcularYGuardar()">Calcular y Guardar</button>
-        <button type="button" onclick="agregarNuevoEmpleado()">Agregar Nuevo Empleado</button>
-        <button id="exportExcelButton">Exportar a Excel</button>
+        <!-- A analizar si se implementa -->
+        <!-- <button type="button" onclick="agregarNuevoEmpleado()">Agregar Nuevo Empleado</button>
+        <button id="exportExcelButton">Exportar a Excel</button> -->
+        <button onclick="exportTableToExcel('tabla-resultados')">Export Table Data To Excel File</button>
 
     </form>
+
+    
     <!-- Tabla para mostrar los resultados -->
     <table id="tabla-resultados">
         <thead>

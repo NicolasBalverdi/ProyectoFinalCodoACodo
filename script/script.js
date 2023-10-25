@@ -17,14 +17,19 @@ function calcularYGuardar() {
     const categoria = document.getElementById('categoria').value;
     const basico = parseFloat(document.getElementById('basico').value);
     const fecha = document.getElementById('fecha').value;
-    const horaInicio = parseInt(document.getElementById('hora-inicio').value);
-    const horaFin = parseInt(document.getElementById('hora-fin').value);
+    const horaInicioHoras = parseInt(document.getElementById('hora-inicio-horas').value);
+    let horaInicioMinutos = parseInt(document.getElementById('hora-inicio-minutos').value);
+    const horaFinHoras = parseInt(document.getElementById('hora-fin-horas').value);
+    let horaFinMinutos = parseInt(document.getElementById('hora-fin-minutos').value);    
+    horaInicioMinutos = horaInicioMinutos ? parseInt(horaInicioMinutos) : 0;
+    horaFinMinutos = horaFinMinutos ? parseInt(horaFinMinutos) : 0;
     const fechaIngresada = new Date(fecha);
     // Calcular el "Valor Hora" dividiendo el "Sueldo Básico" entre 240
     const valorHora = basico / 240;
+    const valorMinuto = valorHora/60;
 
 
-    const horasEnRangos=calcularHorasEnRangos(horaInicio,horaFin);
+    const horasEnRangos=calcularHorasEnRangos(horaInicioHoras,horaFinHoras,horaFinMinutos);
 
     let horasNormales=0;
     let extrasCincuenta=0;
@@ -35,23 +40,42 @@ function calcularYGuardar() {
     const esDiaFeriado=esFeriado(fechaIngresada);
     // Calcular las horas normales, extras al 50%, extras al 100% y nocturnas
     if (esFinDeSemana || esDiaFeriado) {
-        extrasCien = horaFin-horaInicio;    
+        extrasCien = horaFinHoras-horaInicioHoras;    
+        if (horaInicioMinutos!=0||horaFinMinutos!=0) {
+            extrasCien=extrasCien*60+horaFinMinutos+horaInicioMinutos;
+        }
+            
     }else{
         horasNormales = horasEnRangos['13-22'];
         extrasCincuenta = horasEnRangos['6-13'];
+        if (horaInicioMinutos!=0||horaFinMinutos!=0) {
+            horasNormales=horasNormales*60+horaFinMinutos+horaInicioMinutos;
+            extrasCincuenta=extrasCincuenta*60+horaFinMinutos+horaInicioMinutos;
+        }
     }
  
     nocturnas = horasEnRangos['0-6']+horasEnRangos['22-24'];
+    if ((horaInicioMinutos!=0||horaFinMinutos!=0)&&nocturnas!=0) {
+        nocturnas=nocturnas*60+horaFinMinutos+horaInicioMinutos;
+    }
 
     // Calcular el sueldo total
-    const sueldoTotal = valorHora * (horasNormales * 1 + extrasCincuenta * 1.5 + extrasCien * 2 + nocturnas * (17 / 15));
-
+    let sueldoTotal = 0;
+    if (horaInicioMinutos!=0||horaFinMinutos!=0) {
+        sueldoTotal= valorMinuto*(horasNormales * 1 + extrasCincuenta * 1.5 + extrasCien * 2 + nocturnas * (17 / 15));
+        horasNormales=horasNormales/60;
+        extrasCincuenta=extrasCincuenta/60;
+        extrasCien=extrasCien/60;
+        nocturnas=nocturnas/60;
+    }else{
+        sueldoTotal = valorHora * (horasNormales * 1 + extrasCincuenta * 1.5 + extrasCien * 2 + nocturnas * (17 / 15));
+    }
     empleados.push({
         nombre: nombre,
         apellido: apellido,
         categoria: categoria,
         fecha: fecha,
-        horasTrabajadas: `${horaInicio} - ${horaFin}`,
+        horasTrabajadas: `${horaInicioHoras}:${horaInicioMinutos} - ${horaFinHoras}:${horaFinMinutos}`,
         horasNormales: horasNormales,
         extrasCincuenta: extrasCincuenta,
         extrasCien: extrasCien,
@@ -146,26 +170,39 @@ function esFeriado(fecha) {
     return false; // La fecha actual no es un feriado.
 }
 
-function calcularHorasEnRangos(horaInicio, horaFin) {
+function calcularHorasEnRangos(horaInicio, horaFin, minFin) {
     const rangos = {
         '0-6': 0,
         '6-13': 0,
         '13-22': 0,
         '22-24': 0,
     };
-
-    for (let hora = horaInicio; hora < horaFin; hora++) {
-        if (hora >= 0 && hora < 6) {
-            rangos['0-6'] += 1;
-        } else if (hora >= 6 && hora < 13) {
-            rangos['6-13'] += 1;
-        } else if (hora >= 13 && hora < 22) {
-            rangos['13-22'] += 1;
-        } else if (hora >= 22 && hora < 24) {
-            rangos['22-24'] += 1;
+    if (minFin>0) {
+        for (let hora = horaInicio; hora < horaFin+1; hora++) {
+            if (hora >= 0 && hora < 6) {
+                rangos['0-6'] += 1;
+            } else if (hora >= 6 && hora < 13) {
+                rangos['6-13'] += 1;
+            } else if (hora >= 13 && hora < 22) {
+                rangos['13-22'] += 1;
+            } else if (hora >= 22 && hora < 24) {
+                rangos['22-24'] += 1;
+            }
+        }
+    } else {
+        for (let hora = horaInicio; hora < horaFin; hora++) {
+            if (hora >= 0 && hora < 6) {
+                rangos['0-6'] += 1;
+            } else if (hora >= 6 && hora < 13) {
+                rangos['6-13'] += 1;
+            } else if (hora >= 13 && hora < 22) {
+                rangos['13-22'] += 1;
+            } else if (hora >= 22 && hora < 24) {
+                rangos['22-24'] += 1;
+            }
         }
     }
-
+    
     return rangos;
 }
 
@@ -175,50 +212,80 @@ function calcularValorHora() {
     document.getElementById('valor-hora').value = valorHora.toFixed(2);
 }
 
-// Crear un elemento <script>
-const scriptElement = document.createElement('script');
+// // Crear un elemento <script>
+// const scriptElement = document.createElement('script');
 
-// Establecer el atributo src con la URL de la biblioteca "xlsx"
-scriptElement.src = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.0/dist/xlsx.full.min.js';
+// // Establecer el atributo src con la URL de la biblioteca "xlsx"
+// scriptElement.src = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.0/dist/xlsx.full.min.js';
 
-// Definir una función que se ejecutará una vez que se cargue la biblioteca
-scriptElement.onload = function() {
-    // La biblioteca "xlsx" estará disponible aquí
-    console.log('La biblioteca "xlsx" se ha cargado correctamente.');
-    // Puedes usar xlsx aquí para exportar a Excel u otras tareas relacionadas con la biblioteca.
-};
+// // Definir una función que se ejecutará una vez que se cargue la biblioteca
+// scriptElement.onload = function() {
+//     // La biblioteca "xlsx" estará disponible aquí
+//     console.log('La biblioteca "xlsx" se ha cargado correctamente.');
+//     // Puedes usar xlsx aquí para exportar a Excel u otras tareas relacionadas con la biblioteca.
+// };
 
-// Agregar el elemento <script> al documento (esto iniciará la descarga de la biblioteca)
-document.body.appendChild(scriptElement);
+// // Agregar el elemento <script> al documento (esto iniciará la descarga de la biblioteca)
+// document.body.appendChild(scriptElement);
 
-document.getElementById('exportExcelButton').addEventListener('click', function () {
+// document.getElementById('exportExcelButton').addEventListener('click', function () {
     
-    // Crear una hoja de cálculo en formato XLSX
-    const ws = XLSX.utils.json_to_sheet(empleados);
+//     // Crear una hoja de cálculo en formato XLSX
+//     const ws = XLSX.utils.json_to_sheet(empleados);
 
-    // Crear un libro de trabajo y adjuntar la hoja de cálculo
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Empleados");
+//     // Crear un libro de trabajo y adjuntar la hoja de cálculo
+//     const wb = XLSX.utils.book_new();
+//     XLSX.utils.book_append_sheet(wb, ws, "Empleados");
 
-    // Generar un Blob (objeto binario grande) a partir del libro de trabajo
-    const blob = XLSX.write(wb, { bookType: "xlsx", type: "blob" });
+//     // Generar un Blob (objeto binario grande) a partir del libro de trabajo
+//     const blob = XLSX.write(wb, { bookType: "xlsx", type: "blob" });
 
-    // Crear un objeto URL para el Blob
-    const url = URL.createObjectURL(blob);
+//     // Crear un objeto URL para el Blob
+//     const url = URL.createObjectURL(blob);
 
-    // Crear un enlace para descargar el archivo Excel
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "empleados.xlsx"; // Nombre del archivo
-    a.style.display = "none";
+//     // Crear un enlace para descargar el archivo Excel
+//     const a = document.createElement("a");
+//     a.href = url;
+//     a.download = "empleados.xlsx"; // Nombre del archivo
+//     a.style.display = "none";
 
-    // Agregar el enlace al documento y hacer clic automáticamente
-    document.body.appendChild(a);
-    a.click();
+//     // Agregar el enlace al documento y hacer clic automáticamente
+//     document.body.appendChild(a);
+//     a.click();
 
-    // Limpiar el objeto URL y eliminar el enlace después de la descarga
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(a);
+//     // Limpiar el objeto URL y eliminar el enlace después de la descarga
+//     window.URL.revokeObjectURL(url);
+//     document.body.removeChild(a);
 
     
-});
+// });
+function exportTableToExcel(tableID, filename = ''){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(tableID);
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    
+    // Specify file name
+    filename = filename?filename+'.xls':'excel_data.xls';
+    
+    // Create download link element
+    downloadLink = document.createElement("a");
+    
+    document.body.appendChild(downloadLink);
+    
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    
+        // Setting the file name
+        downloadLink.download = filename;
+        
+        //triggering the function
+        downloadLink.click();
+    }
+}
