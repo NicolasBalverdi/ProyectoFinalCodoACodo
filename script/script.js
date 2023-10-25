@@ -62,22 +62,6 @@ function calcularYGuardar() {
     mostrarResultados();
 
 
-    // // Mostrar el "Valor Hora" en el campo correspondiente
-    // document.getElementById('valor-hora').value = valorHora.toFixed(2);
-
-    // // Mostrar el resultado en la página
-    // const resultado = `Nombre: ${nombre} ${apellido}, Categoría: ${categoria},Horas Normales:${horasNormales}, Extras al 50%:${extrasCincuenta}, 
-    // Extras al 100%:${extrasCien}, Nocturnas:${nocturnas} Sueldo Total: ${sueldoTotal.toFixed(2)}, Fecha: ${fecha}`;
-    // document.getElementById('resultado').innerText = resultado;
-
-    // // Opcional: Guardar los datos en un archivo y proporcionar un enlace para descargarlo
-    // const blob = new Blob([resultado], { type: 'text/plain' });
-    // const url = URL.createObjectURL(blob);
-    // const a = document.createElement('a');
-    // a.href = url;
-    // a.download = 'datos.txt';
-    // a.textContent = 'Descargar Datos';
-    // document.getElementById('resultado').appendChild(a);
 }
 
 function mostrarResultados() {
@@ -137,7 +121,7 @@ function mostrarResultados() {
 
 function esFeriado(fecha) {
     const feriados = [
-        //Los (año, mes, dia) los meses estan al -1
+        //Los (año, mes, dia) los meses estan al -1 los dias tambien(en otras palabras la fecha 1/1/2023 es (2023,00,0))
         new Date(2023, 0, 1),  // Año Nuevo
         new Date(2023, 2, 24), // Carnaval
         new Date(2023, 2, 25), // Carnaval
@@ -147,7 +131,7 @@ function esFeriado(fecha) {
         new Date(2023, 5, 25), // Día de la Revolución de Mayo
         new Date(2023, 6, 9),  // Día de la Independencia
         new Date(2023, 7, 21), // Día del Paso a la Inmortalidad del Gral. José de San Martín
-        new Date(2023, 9, 16), // Día del Respeto a la Diversidad Cultural
+        new Date(2023, 9, 15), // Día del Respeto a la Diversidad Cultural
         new Date(2023, 11, 25),// Navidad
     ];
 
@@ -208,10 +192,7 @@ scriptElement.onload = function() {
 document.body.appendChild(scriptElement);
 
 document.getElementById('exportExcelButton').addEventListener('click', function () {
-    const empleados = [
-        // Aquí debes proporcionar tus datos de empleados en la estructura correspondiente
-    ];
-
+    
     // Crear una hoja de cálculo en formato XLSX
     const ws = XLSX.utils.json_to_sheet(empleados);
 
