@@ -36,20 +36,39 @@ function calcularYGuardar() {
     let extrasCien=0;
     let nocturnas=0;
 
-    const esFinDeSemana = fechaIngresada.getDay() === 5 || fechaIngresada.getDay() === 6;
+    const esDomingo = fechaIngresada.getDay() === 6;
+    const esSabado = fechaIngresada.getDay() === 5;
     const esDiaFeriado=esFeriado(fechaIngresada);
     // Calcular las horas normales, extras al 50%, extras al 100% y nocturnas
-    if (esFinDeSemana || esDiaFeriado) {
+    if (esDomingo || esDiaFeriado) {
         extrasCien = horaFinHoras-horaInicioHoras;    
         if (horaInicioMinutos!=0||horaFinMinutos!=0) {
             extrasCien=extrasCien*60+horaFinMinutos+horaInicioMinutos;
         }
             
-    }else{
-        horasNormales = horasEnRangos['13-22'];
-        extrasCincuenta = horasEnRangos['6-13'];
+    }else if (esSabado) {
+        extrasCien=horasEnRangos['13-22']+horasEnRangos['22-24'];
+        extrasCincuenta = horasEnRangos['6-13']+horasEnRangos['0-6'];
         if (horaInicioMinutos!=0||horaFinMinutos!=0) {
-            horasNormales=horasNormales*60+horaFinMinutos+horaInicioMinutos;
+            extrasCien=extrasCien*60;
+            extrasCincuenta=extrasCincuenta*60;
+            if (horaInicioHoras>13) {
+                extrasCien=extrasCien+horaFinMinutos+horaInicioMinutos;
+            } else if(horaFinHoras==13){
+                extrasCincuenta+=horaInicioMinutos;
+                extrasCien=extrasCien+horaFinMinutos;
+            }else if(horaFinHoras<13){
+                extrasCincuenta=extrasCincuenta+horaFinMinutos+horaInicioMinutos;
+            }else{
+                extrasCincuenta+=horaInicioMinutos;
+                extrasCien=extrasCien+horaFinMinutos;
+            }
+        }
+    }else{
+      
+        extrasCincuenta = horaFinHoras-horaInicioHoras;
+        if (horaInicioMinutos!=0||horaFinMinutos!=0) {
+            
             extrasCincuenta=extrasCincuenta*60+horaFinMinutos+horaInicioMinutos;
         }
     }
