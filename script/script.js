@@ -175,6 +175,7 @@ function esFeriado(fecha) {
         new Date(2023, 6, 9),  // Día de la Independencia
         new Date(2023, 7, 21), // Día del Paso a la Inmortalidad del Gral. José de San Martín
         new Date(2023, 9, 15), // Día del Respeto a la Diversidad Cultural
+        new Date(2023, 10, 19) //Soberania Nacional
         new Date(2023, 11, 25),// Navidad
     ];
 
