@@ -1,3 +1,33 @@
+/* Estilos para la barra de navegación */
+nav {
+    background-color: #333; /* Color de fondo */
+    overflow: hidden;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+nav li {
+    float: left;
+}
+
+nav a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px; /* Espaciado interno */
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #ddd; /* Color de fondo al pasar el ratón */
+    color: black;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
