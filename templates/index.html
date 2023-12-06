@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora</title>
-    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="/static/styles-claro.css" id="modo-estilo">
+    <script src="https://kit.fontawesome.com/e3aa06ca23.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
     <!-- Barra de navegación -->
     <nav>
         <ul>
-            <li><a href="templates/agregar_empleado.html">Agregar Empleado</a></li>
-            <li><a href="templates/borrar_empleado.html">Borrar Empleado</a></li>
-            <li><a href="templates/modificar_empleado.html">Modificar Empleado</a></li>
+            <li><a href="/templates/empleados.html">Agregar Empleado</a></li>
+            <li><a href="/templates/borrar_empleado.html">Borrar Empleado</a></li>
+            <li><a href="/templates/modificar_empleado.html">Modificar Empleado</a></li>
         </ul>
     </nav>
-
+    
     <h1>Calculadora de sueldos</h1>
     <form id="data-form">
         <label for="nombre">Nombre:</label>
@@ -78,9 +82,14 @@
     <div id="resultado">
         <!-- Aquí mostrarás el resultado calculado -->
     </div>
-    <script src="script/script.js">
-        
-    </script>
+
+    <button id="boton-cambiar-modo" class="boton-flotante"><i class="fa-solid fa-circle-half-stroke"></i></button>
+    
+    <script src="/static/modooscuro.js"></script>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    
+
 </body>
 </html>
 

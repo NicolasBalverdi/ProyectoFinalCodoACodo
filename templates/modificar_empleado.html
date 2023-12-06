@@ -3,35 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/styles.css">
-
+    <link rel="stylesheet" href="/static/styles-claro.css" id="modo-estilo">
+    <script src="https://kit.fontawesome.com/e3aa06ca23.js" crossorigin="anonymous"></script>
     <title>Modificar empleado.</title>
 </head>
 <body>
     <!-- Formulario para modificar un empleado existente -->
     <h2>Modificar Empleado</h2>
-    <form action="/modificar_empleado" method="POST">
-        <label for="id_empleado">ID del Empleado a Modificar:</label>
-        <input type="number" name="id_empleado" required>
+    <form id="data-form" action="/modificar_empleado" method="POST">
+        <label for="legajo">ID del Empleado a Modificar:</label>
+        <input type="number" name="legajo" required>
         <br>
-        <label for="nueva_descripcion">Nuevo Nombre:</label>
-        <input type="text" name="nueva_nombre" required>
+        <label for="nuevo_legajo">Nuevo Legajo:</label>
+        <input type="number" name="nuevo_legajo" required>
         <br>
-        <label for="nueva_cantidad">Nuevo Apellido:</label>
-        <input type="text" name="nueva_apellido" required>
+        <label for="nuevo_nombre">Nuevo Nombre:</label>
+        <input type="text" name="nuevo_nombre" required>
         <br>
-        <label for="nuevo_precio">Nueva Categoría:</label>
+        <label for="nuevo_apellido">Nuevo Apellido:</label>
+        <input type="text" name="nuevo_apellido" required>
+        <br>
+        <label for="nuevo_dni">Nuevo DNI:</label>
+        <input type="number" name="nuevo_dni" required>
+        <br>
+        <label for="nueva_categoria">Nueva Categoría:</label>
         <input type="text" name="nueva_categoria" required>
-        <br>
-        <label for="nuevo_proveedor">Nuevo DNI:</label>
-        <input type="text" name="nuevo_dni" required>
-        <br>
-        <label for="nuevo_proveedor">Nuevo Legajo:</label>
-        <input type="text" name="nuevo_legajo" required>
         <br>
         
         <button type="submit">Modificar Empleado</button>
     </form>
-
+    <button id="boton-cambiar-modo" class="boton-flotante"><i class="fa-solid fa-circle-half-stroke"></i></button>
+    
+    <script src="/static/modooscuro.js"></script>
 </body>
 </html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registro</title>
+    <link rel="stylesheet" href="/static/estiloslsClaros.css" id="modo-estilo">
+    <script src="https://kit.fontawesome.com/e3aa06ca23.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <main>
+        <div id="success-notification" class="notification success">
+            <span class="close-button" onclick="closesuccess()">&times;</span>
+            <p>¡Cuenta creada exitosamente!</p>
+        </div>
+        <div id="failure-notification" class="notification failure">
+            <span class="close-button" onclick="closefailure()">&times;</span>
+            <p id="failure-text">¡Cuenta creada exitosamente!</p>
+        </div>
+
+        <div class="register">
+            <div class="register-form">
+                <h2 class="t1">Crear una Cuenta</h2>
+            <form id="register-form">
+                <label class="t2" for="email">Correo Electronico</label><br>
+                <input type="email" id="register" name="email" required><br>
+                <label class="t2" for="username">Nombre de Usuario</label><br>
+                <input type="text" id="username" name="username" required><br>
+                <label class="t2" for="first-name">Nombre</label><br>
+                <input type="text" id="first-name" name="first-name" required><br>
+                <label class="t2" for="last-name">Apellido</label><br>
+                <input type="text" id="last-name" name="last-name" required><br>
+                <label class="t2" for="password">Contraseña</label><br>    
+                <input type="password" id="password" name="password" required><br>
+                <label class="t2" for="birthdate">Fecha de Nacimiento</label><br>
+                <div class="birthdate">
+                    <input type="number" id="day" name="birthdate-day" min="1" max="31" placeholder="Día" required>
+                    <input type="number" id="month" name="birthdate-month" min="1" max="12" placeholder="Mes" required>
+                    <input type="numer" id="year" name="birthdate-year" min="1900" max="2099" placeholder="Año" required>
+                </div>
+                <button id="enviar">Crear Cuenta</button>
+            </form>
+            <p class="p1">
+                <a href="/templates/ingreso.html">¿Ya tienes una cuenta?</a>
+            </p>
+        </div>
+    </main>
+    <button id="boton-cambiar-modo" class="boton-flotante"><i class="fa-solid fa-circle-half-stroke"></i></button>
+    <script src="/static/cambiomodols.js"></script>
+<script>
+    const miBoton = document.getElementById("enviar");
+    miBoton.addEventListener('click', register);
+
+    function register(event){
+        event.preventDefault();
+        const referenciaemail=document.getElementById("register")
+        const referenciapassword=document.getElementById("password")
+        const referenciausername=document.getElementById("username")
+        const referencianame=document.getElementById("first-name")
+        const referencialastname=document.getElementById("last-name")
+        const referenciaday=document.getElementById("day")
+        const referenciamonth=document.getElementById("month")
+        const referenciayear=document.getElementById("year")
+        
+        pass = referenciapassword.value;
+        email= referenciaemail.value
+        username= referenciausername.value
+        lastname= referencialastname.value
+        name1= referencianame.value
+        day= referenciaday.value
+        month= referenciamonth.value
+        year= referenciayear.value
+        date=year + "-" + month + "-"+ day
+
+
+        data={
+            "email": email,
+            "login_password": pass,
+            "username": username,
+            "lastname": lastname,
+            "name": name1,
+            "birthday": date
+
+        }
+        fetch('http://127.0.0.1:5000/create_user', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers:{
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                response_status=response.status
+                
+                return response.json();
+            }
+                )
+                
+
+                .then(data => {
+                    
+                    if (response_status === 201){
+                        
+                        const closeButton = document.querySelector(".close-button");
+                        closeButton.addEventListener("click", close);
+                        showsuccess()
+                        setTimeout(function() {
+                            window.location.href = '/HTML/index.html';
+                        }, 5000);
+                    }
+                    else {
+                        const failureText = document.getElementById("failure-text");
+                        
+                        const closeButton = document.querySelector(".close-button");
+                        closeButton.addEventListener("click", close);
+                        failureText.textContent = data.error;
+                        showfailure();
+                    }
+                    ;
+                })
+            .catch(error => {
+                console.error('Error:', error);
+        });
+    
+}
+
+function showsuccess() {
+    const notification = document.getElementById("success-notification");
+    notification.style.display = "block";
+}
+
+function closesuccess() {
+    const notification = document.getElementById("success-notification");
+    notification.style.display = "none";
+}
+
+function showfailure() {
+    const notification = document.getElementById("failure-notification");
+    notification.style.display = "block";
+}
+
+function closefailure() {
+    const notification = document.getElementById("failure-notification");
+    notification.style.display = "none";
+}
+</script>
+</body>
+</html>
+

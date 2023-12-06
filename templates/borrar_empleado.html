@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="/static/styles-claro.css" id="modo-estilo">
+    <script src="https://kit.fontawesome.com/e3aa06ca23.js" crossorigin="anonymous"></script>
     <title>Borrar empleado.</title>
 </head>
 <body>
     <!-- Formulario para eliminar un empleado -->
     <h2>Eliminar Empleado</h2>
-    <form action="/borrar_empleado" method="POST">
-        <label for="id_empleado">ID del Empleado a Eliminar:</label>
-        <input type="text" name="id_empleado" required>
+    <form id="data-form" action="/borrar_empleado" method="POST">
+        <label for="legajo">ID del Empleado a Eliminar:</label>
+        <input type="number" name="legajo" required>
         <br>
         <button type="submit">Eliminar Empleado</button>
     </form>
+    <button id="boton-cambiar-modo" class="boton-flotante"><i class="fa-solid fa-circle-half-stroke"></i></button>
+    
+    <script src="/static/modooscuro.js"></script>
 </body>
 </html>

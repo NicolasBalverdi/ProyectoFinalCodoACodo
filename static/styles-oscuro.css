@@ -1,0 +1,155 @@
+/* Estilos para el modo oscuro */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(40, 40, 40);
+    color: white;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: #36393F;
+    overflow: hidden;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+nav li {
+    float: left;
+}
+
+nav a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #444;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: white;
+}
+
+#data-form {
+    background-color: #36393F;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    color: white;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+    width: 90%;
+    padding: 12px;
+    margin: 5px 0;
+    border: 1px solid #555;
+    border-radius: 3px;
+    color: black;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus {
+    outline: none;
+    border-color: #5865f2;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#valor-hora {
+    background-color: #2e3338;
+    cursor: not-allowed;
+}
+
+button {
+    background-color: #5865f2;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #4b55c5;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    color: white;
+}
+
+table, th, td {
+    border: 1px solid #555;
+}
+
+th, td {
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #5865f2;
+    color: white;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #36393F;
+}
+
+#resultado {
+    text-align: center;
+    margin-top: 20px;
+    color: white;
+}
+
+/*Estilo boton flotante*/
+.boton-flotante {
+    position: fixed;
+    bottom: 20px; /* Ajusta la distancia desde la parte inferior */
+    right: 20px; /* Ajusta la distancia desde la derecha */
+    background-color: #007bff; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    border: none;
+    border-radius: 50%; /* Hace que el botón sea circular */
+    padding: 15px; /* Ajusta el tamaño del botón */
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra ligera */
+}
+
+.boton-flotante:hover {
+    background-color: #0056b3; /* Cambia el color al pasar el ratón */
+}

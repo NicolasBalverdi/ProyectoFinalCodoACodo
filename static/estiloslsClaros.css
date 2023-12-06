@@ -1,0 +1,221 @@
+.boton-flotante {
+    position: fixed;
+    bottom: 20px; /* Ajusta la distancia desde la parte inferior */
+    right: 20px; /* Ajusta la distancia desde la derecha */
+    background-color: #007bff; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    border: none;
+    border-radius: 50%; /* Hace que el botón sea circular */
+    padding: 15px; /* Ajusta el tamaño del botón */
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra ligera */
+}
+
+.boton-flotante:hover {
+    background-color: #0056b3; /* Cambia el color al pasar el ratón */
+}
+
+
+
+body {
+    background: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+}
+
+.title1 {
+    display: flex;
+    align-items: center;
+}
+
+.imgTitle1 {
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+}
+
+.imgTitle1:hover {
+    cursor: pointer;
+    opacity: 0.8;     
+}
+
+.h1 {
+    font-size: 20px;
+    color: black;
+    margin-left: 7px;
+}
+
+.login {
+    display: flex;
+    background: #ffffff;
+    padding: 20px 20px 20px 30px;
+    max-width: 500px;
+    border-radius: 5px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.t1 {
+    font-size: 25px;
+    color: black;
+    font-weight: 800;
+}
+
+.t2 {
+    margin-top: 10px;
+    color: #888b8f;
+    font-size: 17px;
+}
+
+form {
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+form input {
+    width: 400px;
+    background: #f0f0f0;
+    border: none;
+    font-size: 15px;
+    color: black;
+    padding: 12px;
+    border-radius: 2px;
+    outline: solid 5px transparent;
+}
+
+form button {
+    width: 100%;
+    margin-top: 25px;
+    font-size: 15px;
+    font-weight: 300;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 11px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background: #0056b3;
+}
+
+.p1 {
+    display: flex;
+    color: black;
+}
+
+.p1 a {
+    display: flex;
+    color: #007bff;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.p1 a:hover {
+    opacity: 85%;
+}
+
+.register {
+    display: flex;
+    background: #ffffff;
+    padding: 20px 20px 20px 30px;
+    width: fit-content;
+    border-radius: 5px;    
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.birthdate {
+    display: flex;
+    justify-content: space-between;
+}
+
+.birthdate input {
+    width: 30%;
+}
+
+.success {
+    background-color: #4CAF50;
+    border-color: #45a049;
+}
+
+.failure {
+    background-color: #bd1d1d;
+    border-color: #ac0701;
+}
+
+.notification {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    min-width: 250px;
+    padding: 15px;    
+    color: black;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+}
+
+.close-button {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+@media (max-width: 830px) {
+    .login, .register {
+        width: 100%;   
+    }   
+}
+
+.notification {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    min-width: 250px;
+    padding: 15px;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    }
+    
+    
+.success {
+    background-color: #4CAF50;
+    border-color: #45a049;
+    }
+
+.failure{
+    background-color: #bd1d1d;
+    border-color: #ac0701;
+}
+    
+.close-button {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    }
+
+    .close-button:hover {
+        opacity: 0.7;
+    }

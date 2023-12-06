@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Empleados</title>
+    <link rel="stylesheet" href="/static/styles-claro.css" id="modo-estilo">
+    <script src="https://kit.fontawesome.com/e3aa06ca23.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <h1>Interfaz de Administración de Empleados</h1>
+
+    <!-- Formulario para agregar un nuevo empleado -->
+    <h2>Agregar Empleado</h2>
+    <form id="data-form" action="/empleados" method="POST">
+        <label for="legajo">Legajo:</label>
+        <input type="number" name="legajo" required>
+        <br>
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" required>
+        <br>
+        <label for="apellido">Apellido:</label>
+        <input type="text" name="apellido" required>
+        <br>
+        <label for="dni">DNI:</label>
+        <input type="number" name="dni" required>
+        <br>
+        <label for="categoria">Categoría:</label>
+        <input type="text" name="categoria" required>
+        <br>
+        
+        <button type="submit">Agregar Empleado</button>
+    </form>
+    <button id="boton-cambiar-modo" class="boton-flotante"><i class="fa-solid fa-circle-half-stroke"></i></button>
+    
+    <script src="/static/modooscuro.js"></script>
+</body>
+
+</html>
